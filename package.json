@@ -1,0 +1,15 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "Music Generator JS",
+  "main": "midi.js",
+  "dependencies": {
+    "scribbletune": "^1.0.0-alpha.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John McDonald",
+  "license": "ISC"
+}

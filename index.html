@@ -1,0 +1,309 @@
+<!\DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body{
+			font-size: 20pt;
+		}
+		.chordbox{
+			margin-right: 1px;
+
+			margin-left: 5px;
+			font-size: 18pt;
+			display: inline;
+			
+		}
+		.line {
+			display: inline;
+		}
+		.bar {
+			margin-top: 30px;
+			height: 100px;
+			width: 320px;
+			border: 3px solid black;
+			display: inline-block;
+		}
+		.beat {
+			height: 100px;
+			width: 78px;
+			border: 1px solid blue;
+			float: left;
+		}
+		.eightbeat {
+			height: 100px;
+			width: 37px;
+			border: 1px dotted grey;
+			float: left;
+			text-align: center;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	<div class="line">
+		<div id="bar1" class="bar">
+			<div class="beat"><div id="b1" class="eightbeat"></div><div id="b2" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b3" class="eightbeat"></div><div id="b4" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b5" class="eightbeat"></div><div id="b6" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b7" class="eightbeat"></div><div id="b8" class="eightbeat"></div>
+			</div>
+		</div>
+			<div id="c0" class="chordbox"></div>
+		<div id="bar2" class="bar">
+			<div class="beat"><div id="b9" class="eightbeat"></div><div id="b10" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b11" class="eightbeat"></div><div id="b12" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b13" class="eightbeat"></div><div id="b14" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b15" class="eightbeat"></div><div id="b16" class="eightbeat"></div>
+			</div>
+		</div>
+			<div id="c1" class="chordbox"></div>
+	</div>
+
+	<div class="line">
+		<div id="bar3" class="bar">
+			<div class="beat"><div id="b17" class="eightbeat"></div><div id="b18" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b19" class="eightbeat"></div><div id="b20" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b21" class="eightbeat"></div><div id="b22" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b23" class="eightbeat"></div><div id="b24" class="eightbeat"></div>
+			</div>
+		</div>
+		<div id="c2" class="chordbox"></div>
+		<div id="bar4" class="bar">
+			<div class="beat"><div id="b25" class="eightbeat"></div><div id="b26" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b27" class="eightbeat"></div><div id="b28" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b29" class="eightbeat"></div><div id="b30" class="eightbeat"></div>
+			</div>
+			<div class="beat"><div id="b31" class="eightbeat"></div><div id="b32" class="eightbeat"></div>
+			</div>
+		</div>
+		<div id="c3" class="chordbox"></div>
+	</div>
+<script type="text/javascript">
+	
+	//*******************
+	//
+	//	Music Generator JS
+	//
+	//*******************
+	
+	var song = [];
+	var progression = [];
+	var noteLog = [];
+
+
+	for(var i=0;i<31;i++){   //Init Song Array with 32 'empty' eigth notes
+		song.push({pitch: 0,length: 0});
+	}
+	
+	function Rand(num){var rand = Math.floor((Math.random()*num));return rand;} //Get Random Number
+	function makeChords(){
+		var chords = ["I","ii","iii","IV","V","vi"];
+		var chordNumber1 = Rand(6);
+		switch(chordNumber1){
+			case chordNumber1:
+				progression[0]=chords[chordNumber1];
+				break;
+		}
+		for (var i = 0;i<3;i++) {
+			if (progression[i]==="I") {
+				var chordNumber2 = Rand(6)+1;
+				switch(chordNumber2){
+					case chordNumber2:
+						progression[i+1]=chords[chordNumber2];
+						break;
+				}
+			}else if(progression[i]==="ii"){
+				var chordNumber2 = Rand(2);
+				switch(chordNumber2){
+					case 0:
+						progression[i+1]='I';
+						break;
+					case 1:
+						progression[i+1]='V';
+						break;
+					case 2:
+						progression[i+1]='viio';
+						break;
+				}
+			}else if(progression[i]==="iii"){
+				var chordNumber2 = Rand(2);
+					switch(chordNumber2){
+					case 0:
+						progression[i+1]='I';
+						break;
+					case 1:
+						progression[i+1]='IV';
+						break;
+					case 2:
+						progression[i+1]='vi';
+						break;
+					}
+			}else if(progression[i]==="IV"){
+				var chordNumber2 = Rand(3);
+				switch(chordNumber2){
+					case 0:
+						progression[i+1]='I';
+						break;
+					case 1:
+						progression[i+1]='ii';
+						break;
+					case 2:
+						progression[i+1]='V';
+						break;
+					case 3:
+						progression[i+1]='viio';
+						break;
+				}
+			}else if(progression[i]==="V"){
+				var chordNumber2 = Rand(2);
+				switch(chordNumber2){
+					case 0:
+						progression[i+1]='I';
+						break;
+					case 1:
+						progression[i+1]='vi';
+						break;
+				}
+			}else if(progression[i]==="vi"){
+				var chordNumber2 = Rand(4);
+				switch(chordNumber2){
+					case 0:
+						progression[i+1]='I';
+						break;
+					case 1:
+						progression[i+1]='ii';
+						break;
+					case 2:
+						progression[i+1]='iii';
+						break;
+					case 3:
+						progression[i+1]='IV';
+						break;
+					case 4:
+						progression[i+1]='V';
+						break;
+				}
+			}else if(progression[i]==="viio"){
+				progression[i+1]='I';
+			}
+		}
+		for(var jj=0;jj<4;jj++){$("#c" + jj).html(progression[jj]);} //Write out 'chord progression' on webpage
+	}
+		
+		// 			["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+		var notes = ["C4","D4","E4","F4","G4","A4","B4","C5","D5","E5"];
+		function getNote(){       //Pick a random note
+			
+			var rand = Rand(10);
+			switch(rand){case rand:return notes[rand];}
+		}
+	function makeMelody(){
+
+		for (var j = 0; j<31;j++) {   //Fill song array with notes
+			if (j===0) {   			  //Pick FIRST note
+				var note = getNote();
+				song[j].pitch = note;
+				var length = Rand(3);   
+				switch(length){
+					case 0:
+						song[j].length = "1/8";
+						$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9834");
+						noteLog.push(song[j]);
+						break;
+					case 1:
+						song[j].length = "1/4";
+						$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9833");
+						noteLog.push(song[j]);
+						j++;
+						$("#b" + (j+1)).html("~");
+						break;
+					case 2:
+						song[j].length = "3/8";
+						$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9835");
+						noteLog.push(song[j]);
+						j++;
+						$("#b" + (j+1)).html("~");
+						j++;
+						$("#b" + (j+1)).html("~");
+						break;
+				}
+			}
+			else{
+
+				var chance1 = Rand(4);   //chance of a rest
+				if(chance1===3){
+					song[j].pitch = "r";
+					$("#b" + (j+1)).html(song[j].pitch);
+
+				}else{
+
+
+					do{
+						var note = getNote();
+						var lastnote = noteLog[noteLog.length-1].pitch;
+						var lastNoteIndex = (notes.indexOf(lastnote)+1);
+						var currentNoteIndex = (notes.indexOf(note)+1);
+						var diff = Math.abs(currentNoteIndex - lastNoteIndex);	
+					}while(note===lastnote || diff>5);
+				
+					song[j].pitch = note;
+					var length = Rand(12);   //Determine note length
+					switch(length){
+						case 0:case 1:case 2:case 3:case 4:    //  1/8 note
+							song[j].length = "1/8";
+							$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9834");
+							noteLog.push(song[j]);
+							break;
+						case 5:case 6:case 7:case 8:    //  1/4 note
+							song[j].length = "1/4";
+							$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9833");
+							noteLog.push(song[j]);
+							j++;
+							$("#b" + (j+1)).html("~");
+							break;
+						case 9:case 10:    //  3/8 note 
+							song[j].length = "3/8";
+							$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9835");
+							noteLog.push(song[j]);
+							j++;
+							$("#b" + (j+1)).html("~");
+							j++;
+							$("#b" + (j+1)).html("~");
+							break;
+						case 11:   //  1/2 note
+							song[j].length = "1/2";
+							$("#b" + (j+1)).html(song[j].pitch + "</br>" + "&#9837");
+							noteLog.push(song[j]);
+							j++;
+							$("#b" + (j+1)).html("~");
+							j++;
+							$("#b" + (j+1)).html("~");
+							j++;
+							$("#b" + (j+1)).html("~");
+							break;
+					}
+				}
+			}
+		}
+	}
+	
+	makeChords();
+	makeMelody();
+	console.log(noteLog);
+	
+	
+</script>
+</body>
+</html>
